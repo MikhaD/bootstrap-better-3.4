@@ -4,7 +4,7 @@ type Fn = {
 	type: "function", data: {
 		function: string;
 		param: string;
-		percent: number;
+		amount: number;
 	};
 };
 type ColorTuple = [number, number, number];

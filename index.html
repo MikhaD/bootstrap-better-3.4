@@ -4,149 +4,119 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<meta name="author" content="MikhaD">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Title">
+	<meta property="og:image" content="https://mikha.dev/thumbnail_1200x630.png">
+	<meta property="og:url" content="https://mikha.dev" />
+	<meta property=" og:description" content="">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="og:image:alt" content="Title">
+
+	<meta name="twitter:creator" content="@MikhaDavids">
+
 	<link rel="shortcut icon" href="https://getbootstrap.com/docs/3.4/favicon.ico" type="image/x-icon">
-	<style>
-		*,
-		*::before,
-		*::after {
-			box-sizing: border-box;
-		}
-
-		body {
-			max-width: 1200px;
-			margin: auto;
-		}
-
-		section {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			column-gap: 10%;
-			margin-bottom: 10%;
-		}
-
-		label {
-			display: flex;
-			flex-direction: column;
-			margin: 0 0 1em;
-		}
-
-		span {
-			margin: 5px 0;
-		}
-
-		input {
-			font: inherit;
-			background-color: #fafafa;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-			padding: 8px;
-		}
-	</style>
-	<title>Boot Better Testing</title>
+	<link rel="stylesheet" href="styles.css">
+	<title>Bootstrap Better</title>
 </head>
 
 <body>
-	<h1>Reactivity Testing</h1>
-	<section>
-		<label>
-			<span>@gray-base</span>
-			<input class="form-control" type="text" data-var="@gray-base" value="#000">
-		</label>
-		<label>
-			<span>@gray-same</span>
-			<input class="form-control" type="text" data-var="@gray-same" value="@gray-base">
-		</label>
-		<label>
-			<span>@gray-dark</span>
-			<input class="form-control" type="text" data-var="@gray-dark" value="lighten(@gray-base, 20%)">
-		</label>
-		<label>
-			<span>@gray</span>
-			<input class="form-control" type="text" data-var="@gray" value="lighten(@gray-base, 33.5%)">
-		</label>
-		<label>
-			<span>@gray-light</span>
-			<input class="form-control" type="text" data-var="@gray-light" value="lighten(@gray-base, 46.7%)">
-		</label>
-		<label>
-			<span>@gray-lighter</span>
-			<input class="form-control" type="text" data-var="@gray-lighter" value="lighten(@gray-base, 93.5%)">
-		</label>
-		<label>
-			<span>@brand-primary</span>
-			<input class="form-control" type="text" data-var="@brand-primary" value="darken(#428bca, 6.5%)">
-		</label>
-		<label>
-			<span>@brand-success</span>
-			<input class="form-control" type="text" data-var="@brand-success" value="#5cb85c">
-		</label>
-		<label>
-			<span>@brand-info</span>
-			<input class="form-control" type="text" data-var="@brand-info" value="#5bc0de">
-		</label>
-		<label>
-			<span>@brand-warning</span>
-			<input class="form-control" type="text" data-var="@brand-warning" value="#f0ad4e">
-		</label>
-		<label>
-			<span>@brand-danger</span>
-			<input class="form-control" type="text" data-var="@brand-danger" value="#d9534f">
-		</label>
-		<label>
-			<span>@test-double</span>
-			<input class="form-control" type="text" data-var="@test-double" value="lighten(@gray, 20%)">
-		</label>
-	</section>
-	<section>
-		<label>
-			<span>@component-offset-horizontal</span>
-			<input class="form-control" type="text" data-var="@component-offset-horizontal" value="180px">
-		</label>
-		<label>
-			<span>@text-muted</span>
-			<input class="form-control" type="text" data-var="@text-muted" value="@gray-same">
-		</label>
-		<label>
-			<span>@abbr-border-color</span>
-			<input class="form-control" type="text" data-var="@abbr-border-color" value="@gray-light">
-		</label>
-		<label>
-			<span>@headings-small-color</span>
-			<input class="form-control" type="text" data-var="@headings-small-color" value="@gray-light">
-		</label>
-		<label>
-			<span>@blockquote-small-color</span>
-			<input class="form-control" type="text" data-var="@blockquote-small-color" value="@gray-light">
-		</label>
-		<label>
-			<span>@blockquote-font-size</span>
-			<input class="form-control" type="text" data-var="@blockquote-font-size" value="(@font-size-base * 1.25)">
-		</label>
-		<label>
-			<span>@blockquote-border-color</span>
-			<input class="form-control" type="text" data-var="@blockquote-border-color" value="@gray-lighter">
-		</label>
-		<label>
-			<span>@page-header-border-color</span>
-			<input class="form-control" type="text" data-var="@page-header-border-color"
-				value="darken(@gray-lighter, 30%)">
-		</label>
-		<label>
-			<span>@dl-horizontal-offset</span>
-			<input class="form-control" type="text" data-var="@dl-horizontal-offset"
-				value="@component-offset-horizontal">
-		</label>
-		<label>
-			<span>@dl-horizontal-breakpoint</span>
-			<input class="form-control" type="text" data-var="@dl-horizontal-breakpoint" value="@grid-float-breakpoint">
-		</label>
-		<label>
-			<span>@hr-border</span>
-			<input class="form-control" type="text" data-var="@hr-border" value="@gray-darker">
-		</label>
-	</section>
+	<main>
+		<h1>Drag the Button to your Bookmark Bar</h1>
+		<a class="bookmarklet"
+			href='javascript: (()=>{if(!String(document.location).startsWith("https://getbootstrap.com/docs/3.4/customize/")){document.location="https://getbootstrap.com/docs/3.4/customize/";return}const y=window.confirm("You are about to download and run bootbetter.js from github.com/MikhaD/bootstrap-better-3.4 on this page. Do you want to continue?");if(!y)return;fetch("https://raw.githubusercontent.com/MikhaD/bootstrap-better-3.4/main/bootbetter.js").then(r=>r.text()).then(d=>{const s=document.createElement("script");s.textContent=d;document.body.appendChild(s)})})()'>
+			Bootstrap Better
+		</a>
+		<section class="text">
+			<p>
+				The <a href="https://getbootstrap.com/docs/3.4/customize/">bootstrap 3.4 customization website</a> does
+				not
+				provide
+				a preview for color values (ridiculous). This bookmarklet
+				will inject a script that adds a reactive previews for color values. It works with variables and
+				the following functions: <i>lighten, darken, saturate, desaturate, spin</i>.
+			</p>
+			<p>
+				Clicking the bookmarklet anywhere other than on the customization page will redirect you to the
+				customization page.
+			</p>
+			<p>
+				You can find the source code for the bookmarklet <a
+					href="https://github.com/MikhaD/bootstrap-better-3.4/tree/main">here</a>.
+			</p>
+		</section>
+		<section>
+			<h2>Demo</h2>
+			<p>Try modifying any of the values below. Notice how the colors update as you type.</p>
+			<section class="demo">
+				<label>
+					<span>@bg</span>
+					<input class="form-control" type="text" data-var="@bg" value="#444">
+				</label>
+				<label>
+					<span>@accent</span>
+					<input id="accent" class="form-control" type="text" data-var="@accent" value="#25A7A7">
+				</label>
+				<label>
+					<span>@fg</span>
+					<input class="form-control" type="text" data-var="@fg" value="#fff">
+				</label>
+				<label>
+					<span>@bg-dark</span>
+					<input class="form-control" type="text" data-var="@bg-dark" value="darken(@bg, 20%)">
+				</label>
+				<label>
+					<span>@accent-dark</span>
+					<input class="form-control" type="text" data-var="@accent-dark" value="desaturate(@accent, 20%)">
+				</label>
+				<label>
+					<span>@fg-dark</span>
+					<input class="form-control" type="text" data-var="@fg-dark" value="darken(@fg, 20%)">
+				</label>
+				<label>
+					<span>@bg-light</span>
+					<input class="form-control" type="text" data-var="@bg-light" value="lighten(@bg, 20%)">
+				</label>
+				<label>
+					<span>@accent-light</span>
+					<input class="form-control" type="text" data-var="@accent-light" value="saturate(@accent, 20%)">
+				</label>
+				<label>
+					<span>@fg-light</span>
+					<input class="form-control" type="text" data-var="@fg-light" value="lighten(@fg, 20%)">
+				</label>
+				<label>
+					<span>@accent-dark-alt</span>
+					<input class="form-control" type="text" data-var="@accent-dark-alt"
+						value="darken(@accent-dark, 10%)">
+				</label>
+				<label>
+					<span>@accent-alt</span>
+					<input class="form-control" type="text" data-var="@accent-alt" value="spin(@accent, 30)">
+				</label>
+				<label>
+					<span>@accent-light-alt</span>
+					<input class="form-control" type="text" data-var="@accent-light-alt"
+						value="lighten(@accent-light, 10%)">
+				</label>
+			</section>
+		</section>
+	</main>
 </body>
+<script>
+	let timeout;
+	const bookmarklet = document.querySelector(".bookmarklet");
+	document.querySelector("#accent").addEventListener("input", function(e) {
+		setTimeout(() => {
+			bookmarklet.style.backgroundColor = this.style.backgroundColor;
+		}, 10);
+	})
+</script>
 <script src="./bootbetter.js"></script>
 
 </html>

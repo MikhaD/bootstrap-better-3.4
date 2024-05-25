@@ -1,7 +1,8 @@
 (() => {
-	// if (!String(document.location).startsWith("https://getbootstrap.com/docs/3.4/customize/")) document.location = "https://getbootstrap.com/docs/3.4/customize/";
 	if (window.bb_modified) return;
 	window.bb_modified = true;
+	const functions = ["lighten", "darken", "saturate", "desaturate", "spin"];
+
 	/**
 	 * @param {string} value
 	 * @returns {Clr | Var | Fn | {type: "invalid"}}
@@ -10,15 +11,18 @@
 		value = value.trim();
 		if (/^#([0-9a-fA-F]{3,4}){1,2}$/.test(value)) return { type: "color", data: value };
 		if (value.startsWith("@") && value.indexOf(" ") === -1) return { type: "variable", data: value };
-		if (value.startsWith("lighten") || value.startsWith("darken")) {
-			const start = value.indexOf("(");
+		const start = value.indexOf("(");
+		if (start > 0 && functions.includes(value.slice(0, start))) {
 			const data = value.slice(start + 1, -1).split(",");
-			let percentage = data.pop();
-			if (percentage.endsWith("%") && !isNaN(percentage.slice(0, -1))) {
+			let amount = data.pop();
+			if (amount.endsWith("%")) {
+				amount = amount.slice(0, -1);
+			}
+			if (!isNaN(amount)) {
 				return {
 					type: "function", data: {
 						function: value.slice(0, start),
-						percent: Number(percentage.slice(0, -1)),
+						amount: Number(amount),
 						param: data.join(","),
 					}
 				};
@@ -108,7 +112,7 @@
 		 */
 		lighten(percent) {
 			const [h, s, l] = this.asHSL();
-			return Color.fromHSL(h, s, Math.min(100, l + percent));
+			return Color.fromHSL(h, s, Math.min(100, l + percent), this.a);
 		}
 
 		/**
@@ -117,7 +121,34 @@
 		 */
 		darken(percentage) {
 			const [h, s, l] = this.asHSL();
-			return Color.fromHSL(h, s, Math.max(0, l - percentage));
+			return Color.fromHSL(h, s, Math.max(0, l - percentage), this.a);
+		}
+
+		/**
+		 * Desaturate the color by a given percentage.
+		 * @param {number} percentage - The percentage to desaturate the color by.
+		 */
+		desaturate(percentage) {
+			const [h, s, l] = this.asHSL();
+			return Color.fromHSL(h, Math.max(0, s - percentage), l, this.a);
+		}
+
+		/**
+		 * Saturate the color by a given percentage.
+		 * @param {number} percentage - The percentage to saturate the color by.
+		 */
+		saturate(percentage) {
+			const [h, s, l] = this.asHSL();
+			return Color.fromHSL(h, Math.min(100, s + percentage), l, this.a);
+		}
+
+		/**
+		 * Rotate the hue of the color by a given number of degrees.
+		 * @param {number} degrees
+		 */
+		spin(degrees) {
+			const [h, s, l] = this.asHSL();
+			return Color.fromHSL((h + degrees) % 360, s, l, this.a);
 		}
 
 		/**
@@ -192,9 +223,10 @@
 		 * @param {string} id
 		 * @param {HTMLInputElement} node
 		 */
-		constructor(id, node) {
-			Model.models.set(id, this);
-			this.id = id;
+		constructor(node) {
+			this.id = node.getAttribute("data-var");
+			Model.models.set(this.id, this);
+
 			this.node = node;
 			/** @type {Model | null} */
 			this.subscription = null;
@@ -203,6 +235,11 @@
 			this.filters = [];
 
 			this.value = node.value;
+
+			const self = this;
+			node.addEventListener("input", function() {
+				self.value = this.value;
+			});
 		}
 		/** @param {string} data */
 		set value(data) {
@@ -223,7 +260,7 @@
 					break;
 				}
 				case "function": {
-					this.filters.push([value.data.function, value.data.percent]);
+					this.filters.push([value.data.function, value.data.amount]);
 					this._processValue(value.data.param);
 					break;
 				}
@@ -259,17 +296,18 @@
 			if (this.#color === null) return null;
 
 			let color = this.#color;
-			for (const [fn, percent] of this.filters) {
-				switch (fn) {
-					case "lighten": {
-						color = color.lighten(percent);
-						break;
-					}
-					case "darken": {
-						color = color.darken(percent);
-						break;
-					}
-				}
+			for (const [fn, amount] of this.filters) {
+				color = color[fn](amount);
+				// switch (fn) {
+				// 	case "lighten": {
+				// 		color = color.lighten(amount);
+				// 		break;
+				// 	}
+				// 	case "darken": {
+				// 		color = color.darken(amount);
+				// 		break;
+				// 	}
+				// }
 			}
 			return color;
 		}
@@ -309,16 +347,7 @@
 		}
 	}
 
-
 	for (const input of document.querySelectorAll("input[type='text'].form-control")) {
-		input.model = new Model(input.getAttribute("data-var"), input);
-		input.addEventListener("change", function() {
-			this.model.value = this.value;
-		});
+		input.model = new Model(input);
 	}
 })();
-// const script = document.createElement("script");
-// script.onload = function() {
-// 	console.log("eet worked!");
-// };
-// document.body.appendChild(script);

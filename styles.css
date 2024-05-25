@@ -1,0 +1,86 @@
+*,
+*::before,
+*::after {
+	/* box-sizing: border-box; */
+	font-family: sans-serif;
+}
+
+main {
+	padding-inline: 20px;
+	max-width: 800px;
+	margin: auto;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 80px;
+}
+
+.text {
+	margin-top: 40px;
+	text-align: start;
+}
+
+i {
+	all: unset;
+	font-family: monospace;
+	font-size: 1.25em;
+}
+
+.bookmarklet {
+	width: fit-content;
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+	background-color: teal;
+	padding: 10px 20px;
+	border-radius: 5px;
+	animation: pulse 1.5s ease infinite;
+	transition: background-color 0.2s ease;
+}
+
+.bookmarklet:hover {
+	filter: saturate(160%);
+}
+
+@keyframes pulse {
+	0% {
+		scale: 1;
+	}
+
+	50% {
+		scale: 1.03;
+	}
+
+	100% {
+		scale: 1;
+	}
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+	margin: 0 0 1em;
+	text-align: start;
+}
+
+span {
+	margin: 5px 0;
+}
+
+input {
+	font: inherit;
+	background-color: #f0f0f0;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	padding: 8px;
+}
+
+.demo {
+	width: 100%;
+	font-size: 0.9em;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	column-gap: min(50px, 5%);
+}
