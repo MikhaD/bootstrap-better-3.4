@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="https://getbootstrap.com/docs/3.4/favicon.ico" type="image/x-icon">
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		body {
+			max-width: 1200px;
+			margin: auto;
+		}
+
+		section {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			column-gap: 10%;
+			margin-bottom: 10%;
+		}
+
+		label {
+			display: flex;
+			flex-direction: column;
+			margin: 0 0 1em;
+		}
+
+		span {
+			margin: 5px 0;
+		}
+
+		input {
+			font: inherit;
+			background-color: #fafafa;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+			padding: 8px;
+		}
+	</style>
+	<title>Boot Better Testing</title>
+</head>
+
+<body>
+	<h1>Reactivity Testing</h1>
+	<section>
+		<label>
+			<span>@gray-base</span>
+			<input class="form-control" type="text" data-var="@gray-base" value="#000">
+		</label>
+		<label>
+			<span>@gray-same</span>
+			<input class="form-control" type="text" data-var="@gray-same" value="@gray-base">
+		</label>
+		<label>
+			<span>@gray-dark</span>
+			<input class="form-control" type="text" data-var="@gray-dark" value="lighten(@gray-base, 20%)">
+		</label>
+		<label>
+			<span>@gray</span>
+			<input class="form-control" type="text" data-var="@gray" value="lighten(@gray-base, 33.5%)">
+		</label>
+		<label>
+			<span>@gray-light</span>
+			<input class="form-control" type="text" data-var="@gray-light" value="lighten(@gray-base, 46.7%)">
+		</label>
+		<label>
+			<span>@gray-lighter</span>
+			<input class="form-control" type="text" data-var="@gray-lighter" value="lighten(@gray-base, 93.5%)">
+		</label>
+		<label>
+			<span>@brand-primary</span>
+			<input class="form-control" type="text" data-var="@brand-primary" value="darken(#428bca, 6.5%)">
+		</label>
+		<label>
+			<span>@brand-success</span>
+			<input class="form-control" type="text" data-var="@brand-success" value="#5cb85c">
+		</label>
+		<label>
+			<span>@brand-info</span>
+			<input class="form-control" type="text" data-var="@brand-info" value="#5bc0de">
+		</label>
+		<label>
+			<span>@brand-warning</span>
+			<input class="form-control" type="text" data-var="@brand-warning" value="#f0ad4e">
+		</label>
+		<label>
+			<span>@brand-danger</span>
+			<input class="form-control" type="text" data-var="@brand-danger" value="#d9534f">
+		</label>
+		<label>
+			<span>@test-double</span>
+			<input class="form-control" type="text" data-var="@test-double" value="lighten(@gray, 20%)">
+		</label>
+	</section>
+	<section>
+		<label>
+			<span>@component-offset-horizontal</span>
+			<input class="form-control" type="text" data-var="@component-offset-horizontal" value="180px">
+		</label>
+		<label>
+			<span>@text-muted</span>
+			<input class="form-control" type="text" data-var="@text-muted" value="@gray-same">
+		</label>
+		<label>
+			<span>@abbr-border-color</span>
+			<input class="form-control" type="text" data-var="@abbr-border-color" value="@gray-light">
+		</label>
+		<label>
+			<span>@headings-small-color</span>
+			<input class="form-control" type="text" data-var="@headings-small-color" value="@gray-light">
+		</label>
+		<label>
+			<span>@blockquote-small-color</span>
+			<input class="form-control" type="text" data-var="@blockquote-small-color" value="@gray-light">
+		</label>
+		<label>
+			<span>@blockquote-font-size</span>
+			<input class="form-control" type="text" data-var="@blockquote-font-size" value="(@font-size-base * 1.25)">
+		</label>
+		<label>
+			<span>@blockquote-border-color</span>
+			<input class="form-control" type="text" data-var="@blockquote-border-color" value="@gray-lighter">
+		</label>
+		<label>
+			<span>@page-header-border-color</span>
+			<input class="form-control" type="text" data-var="@page-header-border-color"
+				value="darken(@gray-lighter, 30%)">
+		</label>
+		<label>
+			<span>@dl-horizontal-offset</span>
+			<input class="form-control" type="text" data-var="@dl-horizontal-offset"
+				value="@component-offset-horizontal">
+		</label>
+		<label>
+			<span>@dl-horizontal-breakpoint</span>
+			<input class="form-control" type="text" data-var="@dl-horizontal-breakpoint" value="@grid-float-breakpoint">
+		</label>
+		<label>
+			<span>@hr-border</span>
+			<input class="form-control" type="text" data-var="@hr-border" value="@gray-darker">
+		</label>
+	</section>
+</body>
+<script src="./bootbetter.js"></script>
+
+</html>
